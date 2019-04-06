@@ -3,7 +3,17 @@ import styled from "styled-components";
 import { Card, Header, Container, Button, Image } from "semantic-ui-react";
 
 class VideoInfo extends React.Component {
-  state = { dog: "" };
+  state = { dog: "", likes: 0, dislikes: 0 };
+
+  likeCounter = () => {
+    let number = this.state.likes
+    this.setState({likes: (number + 1)})
+  }
+
+  dislikeCounter = () => {
+    let number = this.state.dislikes
+    this.setState({dislikes: (number + 1)})
+  }
 
   render() {
     return (
@@ -12,11 +22,13 @@ class VideoInfo extends React.Component {
           <Card.Content>
             <Card.Header>
               <VidHead>Video Title Info</VidHead>
-              <Button basic color="grey" floated="right">
+              <Button onClick={() => this.likeCounter()}basic color="grey" floated="right">
                 👍
+                {this.state.likes}
               </Button>
-              <Button basic color="grey" floated="right">
+              <Button onClick={() => this.dislikeCounter()} basic color="grey" floated="right">
                 👎
+                {this.state.dislikes}
               </Button>
             </Card.Header>
             <Card.Meta>
