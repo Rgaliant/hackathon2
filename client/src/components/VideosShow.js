@@ -13,7 +13,7 @@ const VideosShow = props => {
       <HeroVideo videoId={props.match.params.id} />
       <Container>
         <VideoInfo />
-        <VideoComments />
+        <VideoComments   />
       </Container>
     </>
   );

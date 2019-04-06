@@ -10,6 +10,7 @@ import {
 } from "semantic-ui-react";
 import styled from "styled-components";
 import CommentsForm from "./CommentsForm";
+import { withRouter } from 'react-router-dom';
 import axios from "axios";
 
 class VideoComments extends React.Component {
@@ -24,7 +25,11 @@ class VideoComments extends React.Component {
   }
 
   addComment = (comment) => {
-    this.setState({ comments: [comment, ...this.state.comments] })
+    axios.post(`api/videos/${this.props.match.params.id}/comments`)
+      .then( res => {
+        this.setState({comments: [ ...this.state.comments, res.data]})
+      }
+    )
   }
 
   render() {
@@ -130,4 +135,4 @@ const SideText = styled.span`
   padding-top: 90px;
 `;
 
-export default VideoComments;
+export default withRouter(VideoComments);
