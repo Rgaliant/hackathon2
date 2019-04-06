@@ -14,6 +14,7 @@ import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 
 class VideoComments extends React.Component {
+
   state = {
     videos: [
       // Video_id: "1",
@@ -33,6 +34,15 @@ class VideoComments extends React.Component {
     });
   }
 
+
+  addComment = (comment) => {
+    axios.post(`api/videos/${this.props.match.params.id}/comments`, comment)
+      .then( res => {
+        this.setState({comments: [ ...this.state.comments, res.data]})
+      }
+    )
+  }
+
   sample = () => {
     const { videos } = this.state;
     if (videos.length) {
@@ -43,13 +53,8 @@ class VideoComments extends React.Component {
     }
   };
 
-  addComment = comment => {
-    axios
-      .post(`api/videos/${this.props.match.params.id}/comments`)
-      .then(res => {
-        this.setState({ comments: [...this.state.comments, res.data] });
-      });
-  };
+
+
 
   // removeComment = (comment_id, video_id) => {
   //   axios.delete(`/api/videos/${video_id}/comments/${comment_id}`)
