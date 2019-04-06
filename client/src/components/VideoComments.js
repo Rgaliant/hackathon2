@@ -96,7 +96,7 @@ class VideoComments extends React.Component {
                     <Comment.Actions>
                       <Comment.Action>Reply</Comment.Action>
                       <Button color="youtube">edit</Button>
-                      <Button onClick={() => this.removeComment(id, this.props.videoId) color="youtube">delete</Button>
+                      <Button onClick={() => this.removeComment(id, this.props.videoId)} color="youtube">delete</Button>
                     </Comment.Actions>
                   </Comment.Content>
                 </Comment>
