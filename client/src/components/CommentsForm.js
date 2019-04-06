@@ -7,7 +7,7 @@ class CommentsForm extends React.Component {
   defaultValues = {
     comments: "",};
 
-  state = {...this.default}
+  state = {...this.default }
 
   componentDidMount() {
     axios.get(`/api/videos/${this.props.id}/comments/${this.props.match.params.id}`)
@@ -16,8 +16,6 @@ class CommentsForm extends React.Component {
     })
   
   }
-
-  
 
   handleChange = e => {
     const {
@@ -28,15 +26,14 @@ class CommentsForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const comment = { ...this.state }
+    const {comment} =  this.state
     const { video_id } = this.props
-    debugger
-    axios.post(`/api/videos/${video_id}/comments`, comment).then(res => {
-        this.props.addComment(res.data)
-    })
-    this.setState({...this.state});
+    axios.post(`/api/videos/${this.props.match.params.id}/comments`, comment)
+      .then( res => {
+        this.setState({comments: [ ...this.state.comments, res.data]})
+  })}
 
-  }
+
 
   render () {
     const {comments} = this.state

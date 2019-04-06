@@ -14,7 +14,7 @@ import { withRouter } from 'react-router-dom';
 import axios from "axios";
 
 class VideoComments extends React.Component {
-  state = { comments: [] }
+  state = { comments: [], comment: "" }
 
   componentDidMount() {
     const { id } = this.props
@@ -25,7 +25,7 @@ class VideoComments extends React.Component {
   }
 
   addComment = (comment) => {
-    axios.post(`api/videos/${this.props.match.params.id}/comments`)
+    axios.post(`api/videos/${this.props.match.params.id}/comments`, comment)
       .then( res => {
         this.setState({comments: [ ...this.state.comments, res.data]})
       }
