@@ -5,7 +5,7 @@ import axios from "axios";
 import { Card, Header, Container, Button, Image } from "semantic-ui-react";
 
 class VideoInfo extends React.Component {
-  state = { video: "" };
+  state = { video: "", likes: 0, dislikes: 0 };
 
   componentDidMount() {
     const { id } = this.props.match.params;
@@ -13,6 +13,16 @@ class VideoInfo extends React.Component {
       this.setState({ video: res.data });
     });
   }
+
+  likeCounter = () => {
+    let number = this.state.likes;
+    this.setState({ likes: number + 1 });
+  };
+
+  dislikeCounter = () => {
+    let number = this.state.dislikes;
+    this.setState({ dislikes: number + 1 });
+  };
 
   render() {
     const { video } = this.state;
@@ -22,11 +32,23 @@ class VideoInfo extends React.Component {
           <Card.Content>
             <Card.Header>
               <VidHead>{video.title}</VidHead>
-              <Button basic color="grey" floated="right">
+              <Button
+                onClick={() => this.likeCounter()}
+                basic
+                color="grey"
+                floated="right"
+              >
                 👍
+                {this.state.likes}
               </Button>
-              <Button basic color="grey" floated="right">
+              <Button
+                onClick={() => this.dislikeCounter()}
+                basic
+                color="grey"
+                floated="right"
+              >
                 👎
+                {this.state.dislikes}
               </Button>
             </Card.Header>
             <Card.Meta>
