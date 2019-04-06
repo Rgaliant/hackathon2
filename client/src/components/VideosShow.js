@@ -13,7 +13,7 @@ const VideosShow = () => {
       <HeroVideo />
       <Container>
         <VideoInfo />
-        <VideoComments />
+        <VideoComments   />
       </Container>
     </>
   );
