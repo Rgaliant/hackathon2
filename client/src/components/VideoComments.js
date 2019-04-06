@@ -1,44 +1,111 @@
-import React from 'react'
-import {Card, Button, Header} from 'semantic-ui-react'
+import React from "react";
+import {
+  Card,
+  Button,
+  Header,
+  Comment,
+  Segment,
+  Grid,
+  Container
+} from "semantic-ui-react";
+import styled from "styled-components";
 
 const VideoComments = () => {
   return (
     <>
-    <Header>Comments</Header>
-    <Card.Group>
-    <Card fluid raised>
-      <Card.Content>
-        <Card.Header>Matthew Harris</Card.Header>
-        <Card.Description>I love this video</Card.Description>
-      </Card.Content>
-      <Button.Group>
-      <Button color="youtube">edit</Button>
-      <Button color="youtube">delete</Button>
-      </Button.Group>
-    </Card>
-    <Card raised fluid>
-      <Card.Content>
-        <Card.Header>Matthew Harris</Card.Header>
-        <Card.Description>Matthew is a pianist living in Nashville.</Card.Description>
-      </Card.Content>
-      <Button.Group>
-      <Button color="youtube">edit</Button>
-      <Button color="youtube">delete</Button>
-      </Button.Group>
-    </Card>
-    <Card raised fluid>
-      <Card.Content>
-        <Card.Header>Matthew Harris</Card.Header>
-        <Card.Description>Matthew is a pianist living in Nashville.</Card.Description>
-      </Card.Content>
-      <Button.Group>
-      <Button color="youtube">edit</Button>
-      <Button color="youtube">delete</Button>
-      </Button.Group>
-    </Card>
-    </Card.Group>
+      <Grid stackable columns={"equal"}>
+        <Grid.Row>
+          <Grid.Column stretched width={10}>
+            <Comment.Group>
+              <Header as="h3" dividing>
+                Comments
+              </Header>
+              <Segment>
+                <Comment>
+                  <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                  <Comment.Content>
+                    <Comment.Author as="a">Matt</Comment.Author>
+                    <Comment.Metadata>
+                      <div>Today at 5:42PM</div>
+                    </Comment.Metadata>
+                    <Comment.Text>How artistic!</Comment.Text>
+                    <Comment.Actions>
+                      <Comment.Action>Reply</Comment.Action>
+                      <Button color="youtube">edit</Button>
+                      <Button color="youtube">delete</Button>
+                    </Comment.Actions>
+                  </Comment.Content>
+                </Comment>
+              </Segment>
+              <Segment>
+                <Comment>
+                  <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                  <Comment.Content>
+                    <Comment.Author as="a">Matt</Comment.Author>
+                    <Comment.Metadata>
+                      <div>Today at 5:42PM</div>
+                    </Comment.Metadata>
+                    <Comment.Text>How artistic!</Comment.Text>
+                    <Comment.Actions>
+                      <Comment.Action>Reply</Comment.Action>
+                      <Button color="youtube">edit</Button>
+                      <Button color="youtube">delete</Button>
+                    </Comment.Actions>
+                  </Comment.Content>
+                </Comment>
+              </Segment>
+              <Segment>
+                <Comment>
+                  <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
+                  <Comment.Content>
+                    <Comment.Author as="a">Matt</Comment.Author>
+                    <Comment.Metadata>
+                      <div>Today at 5:42PM</div>
+                    </Comment.Metadata>
+                    <Comment.Text>How artistic!</Comment.Text>
+                    <Comment.Actions>
+                      <Comment.Action>Reply</Comment.Action>
+                      <Button color="youtube">edit</Button>
+                      <Button color="youtube">delete</Button>
+                    </Comment.Actions>
+                  </Comment.Content>
+                </Comment>
+              </Segment>
+            </Comment.Group>
+          </Grid.Column>
+          <Grid.Column>
+            <h3>Other Videos</h3>
+            <div>
+              <VidFrame
+                width="100%"
+                title="joe"
+                src="https://www.youtube.com/embed/sCD9zjf_YRU"
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+          </Grid.Column>
+          <Grid.Column>
+            <Container style={{ display: "flex" }}>
+              <SideText>This is a new car</SideText>
+            </Container>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </>
-  )
-}
+  );
+};
 
-export default VideoComments
+const VidFrame = styled.iframe`
+  width: 240px;
+`;
+
+const SideText = styled.span`
+  font-size: 18px;
+  font-weight: 200;
+  padding-left: 50px;
+  padding-top: 90px;
+`;
+
+export default VideoComments;
