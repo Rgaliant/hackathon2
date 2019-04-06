@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom'
 import { Form,} from "semantic-ui-react";
 
 class CommentsForm extends React.Component {
@@ -8,16 +9,15 @@ class CommentsForm extends React.Component {
 
   state = {...this.default}
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const comment = this.state;
-    debugger
-    axios.post(`/api/videos/${this.props.match,params}/comments`, comment).then(res => {
-      console.log()
-      this.props.history.push("/VideosShow");
+  componentDidMount() {
+    axios.get(`/api/videos/${this.props.id}/comments/${this.props.match.params.id}`)
+    .then(res => {
+      this.setState({ ...res.data })
     })
-    this.setState({...this.state});
+  
   }
+
+  
 
   handleChange = e => {
     const {
@@ -25,6 +25,18 @@ class CommentsForm extends React.Component {
     } = e;
     this.setState({ [name]: value });
   };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const comment = { ...this.state }
+    const { video_id } = this.props
+    debugger
+    axios.post(`/api/videos/${video_id}/comments`, comment).then(res => {
+        this.props.addComment(res.data)
+    })
+    this.setState({...this.state});
+
+  }
 
   render () {
     const {comments} = this.state
@@ -42,4 +54,4 @@ class CommentsForm extends React.Component {
   }
 }
 
-export default CommentsForm
+export default withRouter(CommentsForm)
