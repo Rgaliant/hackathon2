@@ -3,6 +3,7 @@ import { media } from "../theme/Media";
 import styled from "styled-components";
 import { Header, Grid, Container, Segment } from "semantic-ui-react";
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class HomePage extends React.Component {
   state = { videos: []}
@@ -66,7 +67,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoLarge.title}
+              <Link to={`/videos/${videoLarge.id}`}>{videoLarge.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column width={4}>
@@ -79,7 +80,8 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoMedium1.title}
+              <Link to={`/videos/${videoMedium1.id}`}>{videoMedium1.title}</Link>
+              
             </Segment>
             <Segment>
             <VidFrame
@@ -90,7 +92,8 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoMedium2.title}
+              <Link to={`/videos/${videoMedium2.id}`}>{videoMedium2.title}</Link>
+             
             </Segment>
           </Grid.Column>
           <Grid.Column width={4}>
@@ -103,7 +106,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoMedium3.title}
+              <Link to={`/videos/${videoMedium3.id}`}>{videoMedium3.title}</Link>
             </Segment>
             <Segment>
               {" "}
@@ -115,7 +118,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoMedium4.title}
+              <Link to={`/videos/${videoMedium4.id}`}>{videoMedium4.title}</Link>
             </Segment>
           </Grid.Column>
         </Grid.Row>
@@ -132,7 +135,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall1.title}
+              <Link to={`/videos/${videoSmall1.id}`}>{videoSmall1.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -145,7 +148,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall2.title}
+              <Link to={`/videos/${videoSmall2.id}`}>{videoSmall2.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -158,7 +161,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall3.title}
+              <Link to={`/videos/${videoSmall3.id}`}>{videoSmall3.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -171,7 +174,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall4.title}
+              <Link to={`/videos/${videoSmall4.id}`}>{videoSmall4.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -184,7 +187,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall5.title}
+              <Link to={`/videos/${videoSmall5.id}`}>{videoSmall5.title}</Link>
             </Segment>
           </Grid.Column>
         </Grid.Row>
@@ -199,7 +202,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall6.title}
+              <Link to={`/videos/${videoSmall6.id}`}>{videoSmall6.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -212,7 +215,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall7.title}
+              <Link to={`/videos/${videoSmall7.id}`}>{videoSmall7.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -225,7 +228,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall8.title}
+              <Link to={`/videos/${videoSmall8.id}`}>{videoSmall8.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -238,7 +241,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall9.title}
+              <Link to={`/videos/${videoSmall9.id}`}>{videoSmall9.title}</Link>
             </Segment>
           </Grid.Column>
           <Grid.Column>
@@ -251,7 +254,7 @@ class HomePage extends React.Component {
                 allowfullscreen
               />
               <br />
-              {videoSmall10.title}
+              <Link to={`/videos/${videoSmall10.id}`}>{videoSmall10.title}</Link>
             </Segment>
           </Grid.Column>
         </Grid.Row>
