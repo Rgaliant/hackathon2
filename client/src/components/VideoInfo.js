@@ -5,6 +5,7 @@ import axios from "axios";
 import { Card, Header, Container, Button, Image } from "semantic-ui-react";
 
 class VideoInfo extends React.Component {
+
   state = { video: "", likes: 0, dislikes: 0 };
 
   componentDidMount() {
