@@ -20,6 +20,7 @@ const App = () => (
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <Route exact path="/videos/:id" component={VideosShow} />
+        <Route exact path="/NewVideo" component={VideoForm} />
         <Route component={NoMatch} />
       </Switch>
     </FetchUser>

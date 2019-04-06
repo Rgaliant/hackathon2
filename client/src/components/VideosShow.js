@@ -7,13 +7,11 @@ import { Container } from "semantic-ui-react";
 const VideosShow = props => {
   return (
     <>
-      <div>
-        <h1>video show page</h1>
-      </div>
+      <div />
       <HeroVideo videoId={props.match.params.id} />
       <Container>
         <VideoInfo />
-        <VideoComments   />
+        <VideoComments />
       </Container>
     </>
   );
