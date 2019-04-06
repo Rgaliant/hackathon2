@@ -4,13 +4,13 @@ import VideoInfo from "./VideoInfo";
 import HeroVideo from "./HeroVideo";
 import { Container } from "semantic-ui-react";
 
-const VideosShow = () => {
+const VideosShow = props => {
   return (
     <>
       <div>
         <h1>video show page</h1>
       </div>
-      <HeroVideo />
+      <HeroVideo videoId={props.match.params.id} />
       <Container>
         <VideoInfo />
         <VideoComments />
