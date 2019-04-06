@@ -34,14 +34,14 @@ class Api::CommentsController < ApplicationController
   private 
 
   def set_video
-    @video = video.find(params[:video_id])
+    @video = Video.find(params[:video_id])
   end
 
   def set_comment
-    @comment = comment.find(params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   def comment_params 
-    params.require(:comment).permit(:name, :user_id, :video_id)
+    params.require(:comment).permit(:name)
   end  
 end

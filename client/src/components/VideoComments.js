@@ -9,8 +9,25 @@ import {
   Container
 } from "semantic-ui-react";
 import styled from "styled-components";
+import CommentsForm from "./CommentsForm";
+import axios from "axios";
 
-const VideoComments = () => {
+class VideoComments extends React.Component {
+  state = { comments: [] }
+
+  componentDidMount() {
+    const { id } = this.props
+    axios.get(`api/videos/${id}/comments`)
+    .then(res => {
+      this.setState({ comments: res.data })
+    })
+  }
+
+  addComment = (comment) => {
+    this.setState({ comments: [comment, ...this.state.comments] })
+  }
+
+  render() {
   return (
     <>
       <Grid stackable columns={"equal"}>
@@ -92,10 +109,15 @@ const VideoComments = () => {
             </Container>
           </Grid.Column>
         </Grid.Row>
+        <CommentsForm 
+        video_id={this.props.id}
+        addComment={this.addComment}
+        />
       </Grid>
     </>
   );
 };
+}
 
 const VidFrame = styled.iframe`
   width: 240px;
