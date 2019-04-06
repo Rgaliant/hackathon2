@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Card, Header, Container, Button, Image } from "semantic-ui-react";
 
 class VideoInfo extends React.Component {
-  state = { dog: "", likes: 0, dislikes: 0 };
+  state = { likes: 0, dislikes: 0 };
 
   likeCounter = () => {
     let number = this.state.likes

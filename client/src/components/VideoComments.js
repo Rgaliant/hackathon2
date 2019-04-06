@@ -27,6 +27,14 @@ class VideoComments extends React.Component {
     this.setState({ comments: [comment, ...this.state.comments] })
   }
 
+  removeComment = (comment_id, video_id) => {
+    axios.delete(`/api/videos/${video_id}/comments/${comment_id}`)
+      .then( res => {
+        const { comments, } = this.props;
+        this.setState({ comments: comments.filter(c => c.id !== id), })
+      })
+  }
+
   render() {
   return (
     <>
@@ -83,7 +91,7 @@ class VideoComments extends React.Component {
                     <Comment.Actions>
                       <Comment.Action>Reply</Comment.Action>
                       <Button color="youtube">edit</Button>
-                      <Button color="youtube">delete</Button>
+                      <Button onClick={() => this.removeComment(id, this.props.videoId) color="youtube">delete</Button>
                     </Comment.Actions>
                   </Comment.Content>
                 </Comment>
