@@ -10,10 +10,11 @@ class Api::CommentsController < ApplicationController
     render json: @comment
   end
 
+
   def create
-    comment = Comment.new(comment_params)
-    if comment.save 
-      render json: comment
+    @comment = @video.comments.create(comment_params)
+    if @comment.save 
+      render json: @comment
     else  
       render json: comment.errors, status: 422
     end  
@@ -42,7 +43,7 @@ class Api::CommentsController < ApplicationController
   end
 
   def comment_params 
-    params.require(:comment).permit(:comment)
+    params.require(:comment).permit(:comment, :body, :user_id)
 
   end  
 end

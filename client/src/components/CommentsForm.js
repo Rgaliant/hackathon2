@@ -1,54 +1,45 @@
-import React from 'react';
-import axios from 'axios';
-import { withRouter } from 'react-router-dom'
-import { Form,} from "semantic-ui-react";
+import React from "react";
+import { Form, Image, Button, Icon } from "semantic-ui-react";
+import axios from "axios";
 
 class CommentsForm extends React.Component {
-  defaultValues = {
-    comments: "",};
-
-  state = {...this.default }
-
-  componentDidMount() {
-    axios.get(`/api/videos/${this.props.id}/comments/${this.props.match.params.id}`)
-    .then(res => {
-      this.setState({ ...res.data })
-    })
-  
-  }
+  state = { body: "" };
 
   handleChange = e => {
-    const {
-      target: { name, value }
-    } = e;
+    const { name, value } = e.target;
     this.setState({ [name]: value });
   };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const {comment} =  this.state
-    const { video_id } = this.props
-    axios.post(`/api/videos/${this.props.match.params.id}/comments`, comment)
-      .then( res => {
-        this.setState({comments: [ ...this.state.comments, res.data]})
-  })}
+  handleSubmit = e => {
+    const comment = {
+      body: this.state.body,
+      video_id: this.props.video_id,
+      user_id: this.props.user_id
+    };
+    axios
+      .post(`/api/videos/${this.props.video_id}/comments`, comment)
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+    this.setState({ body: "" });
+    this.props.updateComments(comment);
+  };
 
-
-
-  render () {
-    const {comments} = this.state
+  render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Input
-          label="Comment"
-          name="Comment"
-          value={comments}
-          onChange={this.handleChange}
+      <div style={{ display: "flex", alignItems: "center" }}>
+        <Form style={{ textAlign: "center", width: "100%" }}>
+          <Form.TextArea
+            placeholder="Add a public comment"
+            name="body"
+            value={this.state.body}
+            onChange={this.handleChange}
           />
-          <Form.Button color="youtube"> Submit </Form.Button>
-       </Form>
-    )
+        </Form>
+        <Button icon onClick={this.handleSubmit} color="red">
+          <Icon name="send" />
+        </Button>
+      </div>
+    );
   }
 }
-
-export default withRouter(CommentsForm)
+export default CommentsForm;

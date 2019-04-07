@@ -6,15 +6,17 @@ import {
   Comment,
   Segment,
   Grid,
-  Container
+  Container,
+  Icon,
+  Image
 } from "semantic-ui-react";
 import styled from "styled-components";
 import CommentsForm from "./CommentsForm";
 import { withRouter, Link } from "react-router-dom";
+import { AuthConsumer } from "../providers/AuthProvider";
 import axios from "axios";
 
 class VideoComments extends React.Component {
-
   state = {
     videos: [
       // Video_id: "1",
@@ -28,20 +30,22 @@ class VideoComments extends React.Component {
   };
 
   componentDidMount() {
-    const { id } = this.props;
-    axios.get(`api/videos/${id}/comments`).then(res => {
+    axios.get(`api/videos/${this.props.video_id}/comments`).then(res => {
       this.setState({ comments: res.data });
     });
   }
 
+  updateComments = comment => {
+    this.setState({ comments: [comment, ...this.state.comments] });
+  };
 
-  addComment = (comment) => {
-    axios.post(`api/videos/${this.props.match.params.id}/comments`, comment)
-      .then( res => {
-        this.setState({comments: [ ...this.state.comments, res.data]})
-      }
-    )
-  }
+  handleDelete = id => {
+    axios.delete(`/api/videos/${this.props.id}/comments/${id}`).then(res =>
+      this.setState({
+        comments: this.state.comments.filter(c => c.id !== id)
+      })
+    );
+  };
 
   sample = () => {
     const { videos } = this.state;
@@ -53,8 +57,16 @@ class VideoComments extends React.Component {
     }
   };
 
-
-
+  showButtons = cid => {
+    return (
+      <div>
+        <Button icon color="blue" onClick={this.toggleForm}>
+          <Icon name="pencil" />
+        </Button>
+        <Button icon="trash" onClick={() => this.handleDelete(cid)} />
+      </div>
+    );
+  };
 
   // removeComment = (comment_id, video_id) => {
   //   axios.delete(`/api/videos/${video_id}/comments/${comment_id}`)
@@ -69,6 +81,7 @@ class VideoComments extends React.Component {
     const vidB = this.sample();
     const vidC = this.sample();
     const vidD = this.sample();
+    const { comments } = this.state;
     return (
       <>
         <Grid stackable columns={"equal"}>
@@ -76,59 +89,46 @@ class VideoComments extends React.Component {
             <Grid.Column stretched width={10}>
               <Comment.Group>
                 <Header as="h3" dividing>
-                  Comments
+                  <CommentsForm
+                    video_id={this.props.id}
+                    updateComments={this.updateComments}
+                  />
                 </Header>
-                <Segment>
-                  <Comment>
-                    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
-                    <Comment.Content>
-                      <Comment.Author as="a">Matt</Comment.Author>
-                      <Comment.Metadata>
-                        <div>Today at 5:42PM</div>
-                      </Comment.Metadata>
-                      <Comment.Text>How artistic!</Comment.Text>
-                      <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                        <Button color="youtube">edit</Button>
-                        <Button color="youtube">delete</Button>
-                      </Comment.Actions>
-                    </Comment.Content>
-                  </Comment>
-                </Segment>
-                <Segment>
-                  <Comment>
-                    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
-                    <Comment.Content>
-                      <Comment.Author as="a">Matt</Comment.Author>
-                      <Comment.Metadata>
-                        <div>Today at 5:42PM</div>
-                      </Comment.Metadata>
-                      <Comment.Text>How artistic!</Comment.Text>
-                      <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                        <Button color="youtube">edit</Button>
-                        <Button color="youtube">delete</Button>
-                      </Comment.Actions>
-                    </Comment.Content>
-                  </Comment>
-                </Segment>
-                <Segment>
-                  <Comment>
-                    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" />
-                    <Comment.Content>
-                      <Comment.Author as="a">Matt</Comment.Author>
-                      <Comment.Metadata>
-                        <div>Today at 5:42PM</div>
-                      </Comment.Metadata>
-                      <Comment.Text>How artistic!</Comment.Text>
-                      <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                        <Button color="youtube">edit</Button>
-                        {/* <Button onClick={() => this.removeComment(id, this.props.videoId)} color="youtube">delete</Button> */}
-                      </Comment.Actions>
-                    </Comment.Content>
-                  </Comment>
-                </Segment>
+                <Segment.Group>
+                  {comments.map(comment => (
+                    <>
+                      <Segment key={comment.id}>
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between"
+                          }}
+                        >
+                          <div>
+                            <h4>
+                              <Image
+                                src="https://i.imgur.com/XLErQNQ.png"
+                                avatar
+                              />
+                              uToober
+                            </h4>
+                            {comment.body}
+                            <p
+                              style={{
+                                fontSize: "10px",
+                                color: "grey",
+                                fontWeight: "400"
+                              }}
+                            >
+                              1 Day Ago
+                            </p>
+                          </div>
+                          {this.showButtons(comment.user_id)}
+                        </div>
+                      </Segment>
+                    </>
+                  ))}
+                </Segment.Group>
               </Comment.Group>
             </Grid.Column>
             <Grid.Column>
@@ -190,9 +190,18 @@ class VideoComments extends React.Component {
               </Container>
             </Grid.Column>
           </Grid.Row>
-          <CommentsForm video_id={this.props.id} addComment={this.addComment} />
         </Grid>
       </>
+    );
+  }
+}
+
+export class ConnectedComments extends React.Component {
+  render() {
+    return (
+      <AuthConsumer>
+        {auth => <VideoComments {...this.props} auth={auth} />}
+      </AuthConsumer>
     );
   }
 }
@@ -208,4 +217,4 @@ const SideText = styled.span`
   padding-top: 90px;
 `;
 
-export default withRouter(VideoComments);
+export default ConnectedComments;

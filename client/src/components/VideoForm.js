@@ -84,7 +84,7 @@ class VideoForm extends React.Component {
               onChange={this.handleChange}
             />
             <Button color="youtube">
-              <Form.Field control="button">upload</Form.Field>
+              <Form.Field>upload</Form.Field>
             </Button>
           </Form>
         </Container>
