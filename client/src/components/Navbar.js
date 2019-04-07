@@ -12,7 +12,7 @@ class Navbar extends React.Component {
 
     if (user) {
       return (
-        <Menu.Menu position="right">
+        <Menu.Menu pointing secondary position="right">
           <Menu.Item>
             <Image
               circular
