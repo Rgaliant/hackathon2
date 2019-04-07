@@ -1,16 +1,16 @@
 {
-  "name": "dpl-hackathon-group-4",
+  "name": "hackathon2",
   "version": "1.0.0",
-  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "description": "",
   "main": "index.js",
   "directories": {
     "lib": "lib",
     "test": "test"
   },
+  "dependencies": {},
+  "devDependencies": {},
   "scripts": {
-    "build": "cd client && npm install --only=dev && npm install && npm run build && cd ..",
-    "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "npm run build && npm run deploy && echo 'Client Built'"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,5 @@
   "bugs": {
     "url": "https://github.com/Rgaliant/hackathon2/issues"
   },
-  "homepage": "https://github.com/Rgaliant/hackathon2"
+  "homepage": "https://github.com/Rgaliant/hackathon2#readme"
 }
