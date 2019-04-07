@@ -38,11 +38,11 @@ class Api::CommentsController < ApplicationController
   end
 
   def set_comment
-    @comment = Comment.find(params[:id])
+    @comment = Video.comments.find(params[:id])
   end
 
   def comment_params 
-    params.require(:comment).permit(:comment)
+    params.require(:comment).permit(:name, :video_id)
 
   end  
 end

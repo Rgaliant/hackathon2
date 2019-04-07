@@ -4,45 +4,35 @@ import { withRouter } from 'react-router-dom'
 import { Form,} from "semantic-ui-react";
 
 class CommentsForm extends React.Component {
-  defaultValues = {
-    comments: "",};
-
-  state = {...this.default }
-
-  componentDidMount() {
-    axios.get(`/api/videos/${this.props.id}/comments/${this.props.match.params.id}`)
-    .then(res => {
-      this.setState({ ...res.data })
-    })
+  state = { name: ''
+  }
   
+
+ 
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const {name} = this.state
+    axios.post(`/api/videos/${this.props.match.params.id}/comments`, {name: this.state.name, video_id: this.props.match.params.id})
+      .then( res => {
+
+      })
+    
   }
 
+
   handleChange = e => {
-    const {
-      target: { name, value }
-    } = e;
-    this.setState({ [name]: value });
+    this.setState({ [e.target.name]: e.target.value });
   };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const {comment} =  this.state
-    const { video_id } = this.props
-    axios.post(`/api/videos/${this.props.match.params.id}/comments`, comment)
-      .then( res => {
-        this.setState({comments: [ ...this.state.comments, res.data]})
-  })}
-
 
 
   render () {
-    const {comments} = this.state
+   
     return (
       <Form onSubmit={this.handleSubmit}>
         <Form.Input
           label="Comment"
-          name="Comment"
-          value={comments}
+          name="name"
+          value={this.state.name}
           onChange={this.handleChange}
           />
           <Form.Button color="youtube"> Submit </Form.Button>

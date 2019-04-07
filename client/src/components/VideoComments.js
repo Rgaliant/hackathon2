@@ -28,8 +28,7 @@ class VideoComments extends React.Component {
   };
 
   componentDidMount() {
-    const { id } = this.props;
-    axios.get(`api/videos/${id}/comments`).then(res => {
+    axios.get(`/api/videos/${this.props.match.params.id}/comments`).then(res => {
       this.setState({ comments: res.data });
     });
   }
